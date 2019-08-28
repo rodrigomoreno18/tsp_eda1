@@ -1,3 +1,10 @@
+/*
+	Rodrigo Moreno
+	LCC - Estructuras de Datos y Algoritmos | 2019
+	rmoreno.unr@gmail.com
+	github.com/rodrigomoreno18/tsp_eda1
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -40,15 +47,21 @@ typedef struct {
 /*
 	Visitadas lleva la cuenta de las ciudades
 	ya visitadas (tanto cantidad como indices).
-	Los indices se almacenan 
+	Los indices se almacenan en su posicion en
+	la bitmask.
+	Por ejemplo ciudades 2 y 5 = 0010 0100
 */
 typedef struct {
 	long long int bitmask;
 	unsigned int cantidad_visitada;
 }  Visitadas;
 
+
+/*
+	Headers de funciones 
+*/
 Camino menor_camino(Mapa * mapa);
-Camino procesar(Mapa * mapa, Camino optimo, Camino temporal,
+Camino tsp(Mapa * mapa, Camino optimo, Camino temporal,
 									Visitadas visitadas,	unsigned int actual);
 Mapa * cargar_archivo(char * archivo);
 void guardar_archivo(char * archivo, Mapa * mapa, Camino camino);
@@ -58,6 +71,8 @@ unsigned int fue_visitada(Visitadas visitadas, unsigned int ciudad);
 unsigned int * obtener_pesos_adyacentes(Mapa * mapa, int ciudad);
 void limpiar_mapa(Mapa * mapa);
 
+
+/* MAIN */
 int main(int argc, char ** argv){
 	if (argc != 3) {
 		printf("Pasar como argumentos obligatorios el nombre del archivo de entrada y el de salida.\n");
@@ -79,6 +94,7 @@ int main(int argc, char ** argv){
 	printf("Guardando recorrido optimo en '%s'...\n", argv[2]);
 	guardar_archivo(argv[2], mapa, camino);
 
+	// Mostrar el camino por pantalla para rapido interpretado (en indices)
 	int i;
 	printf("\nMenor camino (Final)\n");
 	for (i = 0; i < mapa->cantidad_ciudades; ++i)
@@ -94,6 +110,10 @@ int main(int argc, char ** argv){
 	return 0;
 }
 
+/*
+	Prepara la llamada recursiva al algoritmo (tsp)
+	y devuelve el resultado de la ejecucion completa
+*/
 Camino menor_camino(Mapa * mapa) {
 	Camino optimo;
 	optimo.recorrido = NULL;
@@ -108,15 +128,21 @@ Camino menor_camino(Mapa * mapa) {
 	visitadas.bitmask = 0;
 	visitadas.cantidad_visitada = 0;
 
-	optimo = procesar(mapa, optimo, temporal, visitadas, 0);
+	optimo = tsp(mapa, optimo, temporal, visitadas, 0);
 
 	free(temporal.recorrido);
 
 	return optimo;
 }
 
-Camino procesar(Mapa * mapa, Camino optimo, Camino temporal, Visitadas visitadas, unsigned int actual) {
-	
+/*
+	El algoritmo en si. Recorre cada indice conectado
+	hasta llegar al ultimo nodo, en caso de conectarse
+	al primero, lo almacena si es optimo. Si en un punto
+	internedio el peso total supera al optimo, aborta
+	el camino actual para evitar calculos innecesarios.
+*/
+Camino tsp(Mapa * mapa, Camino optimo, Camino temporal, Visitadas visitadas, unsigned int actual) {
 	Camino nuevo = temporal;
 
 	unsigned int * pesos_adyacentes;
@@ -127,10 +153,14 @@ Camino procesar(Mapa * mapa, Camino optimo, Camino temporal, Visitadas visitadas
 	visitadas = visitar(visitadas, actual);
 	pesos_adyacentes = obtener_pesos_adyacentes(mapa, actual);
 
+	// Caso "base" (todas visitadas)
 	if (visitadas.cantidad_visitada == mapa->cantidad_ciudades) {
-		// Si todas fueron visitadas y la primera esta conectada, dar
-		// por finalizado y devolver el menor entre el optimo y el nuevo
+		// En este punto, todas fueron visitadas
+
 		if (pesos_adyacentes[0] != 0) {
+			// Existe una conexion entre la actual (ultima)
+			// y la inicial, comparar pesos para decidir si es optimo
+
 			nuevo.peso_total += pesos_adyacentes[0];
 
 			free(pesos_adyacentes);
@@ -160,14 +190,23 @@ Camino procesar(Mapa * mapa, Camino optimo, Camino temporal, Visitadas visitadas
 			// En caso que el nuevo no sea menor al optimo
 			return optimo;
 		} else {
+			// En este caso, no existe conexion entre la ultima y la primera
+			// Por lo tanto el optimo sigue siendo el ya existente
+
 			free(pesos_adyacentes);
 			return optimo;
 		}
 	} else {
+		// Si no es el caso "base", aplicar llamadas recursivas
+		// de forma iterativa sobre las conexiones de la ciudad actual
+
 		for (i = 1; i < mapa->cantidad_ciudades; ++i) {
 			a_calcular = i - (i >= actual ? 1 : 0);
+			// Ya que existen n ciudades y para cada ciudad existen n-1 posibles conexiones
+			// a_calcular representa el indice del array de pesos adyacentes
+			// con respecto a la ciudad de la iteracion actual (i)
 
-			if (fue_visitada(visitadas, i) || pesos_adyacentes[a_calcular] == 0)
+			if (pesos_adyacentes[a_calcular] == 0 || fue_visitada(visitadas, i))
 				continue;
 
 			if (nuevo.peso_total + pesos_adyacentes[a_calcular] >= optimo.peso_total) {
@@ -177,15 +216,20 @@ Camino procesar(Mapa * mapa, Camino optimo, Camino temporal, Visitadas visitadas
 				continue;
 			}
 
+			// Recuperar el peso de entrada a la funcion
+			// para no acumular con las anteriores iteraciones.
 			nuevo.peso_total = peso_guardado;
 
 			nuevo.peso_total += pesos_adyacentes[a_calcular];
 			nuevo.recorrido[visitadas.cantidad_visitada] = i;
-			optimo = procesar(mapa, optimo, nuevo, visitadas, i);
+			
+			// Llamado recursivo
+			optimo = tsp(mapa, optimo, nuevo, visitadas, i);
 		}
 	}
 
 	free(pesos_adyacentes);
+
 	return optimo;
 }
 
@@ -362,6 +406,11 @@ void guardar_archivo(char * archivo, Mapa * mapa, Camino camino) {
 	fclose(fp);
 }
 
+/*
+	Obtiene el indice de la ciudad en el array
+	de ciudades del mapa a partir de su nombre
+	para comenzar a tratar la ciudad como su indice
+*/
 unsigned int obtener_indice_ciudad(Mapa * mapa, char * nombre_ciudad) {
 	unsigned int indice;
 
@@ -373,8 +422,10 @@ unsigned int obtener_indice_ciudad(Mapa * mapa, char * nombre_ciudad) {
 	return mapa->cantidad_ciudades;
 }
 
+/*
+	Enciende el bit "ciudad" en la bitmask de visitadas
+*/
 Visitadas visitar(Visitadas visitadas, unsigned int ciudad) {
-	// Encender el bit 'ciudad' para agregarlo a la bitmask 'visitadas'
 	long long int bit_ciudad = 1 << ciudad;
 
 	Visitadas nuevas = visitadas;
@@ -384,10 +435,17 @@ Visitadas visitar(Visitadas visitadas, unsigned int ciudad) {
 	return nuevas;
 }
 
+/*
+	Controla si el bit "ciudad" esta encendido en la bitmask de visitadas
+*/
 unsigned int fue_visitada(Visitadas visitadas, unsigned int ciudad) {
 	return visitadas.bitmask & (1 << ciudad);
 }
 
+/*
+	Obtiene un array con los pesos de las conexiones de la ciudad
+	con el resto de las ciudades del mapa (0 si no existe conexion entre ambas)
+*/
 unsigned int * obtener_pesos_adyacentes(Mapa * mapa, int ciudad) {
 	unsigned int * pesos = malloc(sizeof(int) * (mapa->cantidad_ciudades - 1));
 	if (!pesos) return NULL;
