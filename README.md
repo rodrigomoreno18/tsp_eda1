@@ -1,6 +1,8 @@
-#Traveling Salesman Problem
+# Traveling Salesman Problem
 
 Solucion al TSP con conexiones simetricas entre ciudades
+
+Utilizando una forma de backtracking con una matriz de adyacencias triangular superior.
 
 #### __*Compilado:*__
 ```
