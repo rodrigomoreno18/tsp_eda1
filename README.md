@@ -1,7 +1,14 @@
-Solution for TSP problem with symmetric city connections.
+#Traveling Salesman Problem
 
-For computer science's data structures and algorithms class.
+Solucion al TSP con conexiones simetricas entre ciudades
 
-Compiling: gcc --std=c99 -Wall main.c -o main.o
+## __*Compilado:*__
+```
+gcc -c --std=c99 TSP.c -o TSP.o
+gcc --std=c99 main.c TSP.o -o main
+```
 
-Executing: ./main.o <input_file> <output_file>
+## __*Ejecutado:*__
+```
+./main <input_file> <output_file>
+```
