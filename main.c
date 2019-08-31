@@ -20,7 +20,6 @@ int main(int argc, char ** argv){
   }
 
   // Armar el mapa a partir de archivo
-  printf("Cargando archivo %s...\n", argv[1]);
   Mapa * mapa = cargar_archivo(argv[1]);
   if (!mapa) {
     printf("Error al generar el mapa.\n");
@@ -31,7 +30,6 @@ int main(int argc, char ** argv){
   Camino camino = menor_camino(mapa); 
 
   // Guardar menor camino en archivo
-  printf("Guardando recorrido optimo en '%s'...\n", argv[2]);
   guardar_archivo(argv[2], mapa, camino);
 
   // Mostrar el camino por pantalla para rapido interpretado (en indices)
