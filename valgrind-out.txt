@@ -1,88 +1,266 @@
-==3025== Memcheck, a memory error detector
-==3025== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==3025== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==3025== Command: ./main entrada2.txt salida1.txt
-==3025== Parent PID: 1816
-==3025== 
---3025-- 
---3025-- Valgrind options:
---3025--    --leak-check=full
---3025--    --show-leak-kinds=all
---3025--    --track-origins=yes
---3025--    --verbose
---3025--    --log-file=valgrind-out.txt
---3025-- Contents of /proc/version:
---3025--   Linux version 4.15.0-58-generic (buildd@lcy01-amd64-012) (gcc version 7.4.0 (Ubuntu 7.4.0-1ubuntu1~18.04.1)) #64-Ubuntu SMP Tue Aug 6 11:10:46 UTC 2019
---3025-- 
---3025-- Arch and hwcaps: X86, LittleEndian, x86-mmxext-sse1-sse2-sse3
---3025-- Page sizes: currently 4096, max supported 4096
---3025-- Valgrind library directory: /usr/lib/valgrind
---3025-- Reading syms from /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/main
---3025-- Reading syms from /lib/i386-linux-gnu/ld-2.27.so
---3025--   Considering /lib/i386-linux-gnu/ld-2.27.so ..
---3025--   .. CRC mismatch (computed 343e7f94 wanted 790ead7f)
---3025--   Considering /usr/lib/debug/lib/i386-linux-gnu/ld-2.27.so ..
---3025--   .. CRC is valid
---3025-- Reading syms from /usr/lib/valgrind/memcheck-x86-linux
---3025--   Considering /usr/lib/valgrind/memcheck-x86-linux ..
---3025--   .. CRC mismatch (computed 595f4df9 wanted 00d74df5)
---3025--    object doesn't have a symbol table
---3025--    object doesn't have a dynamic symbol table
---3025-- Scheduler: using generic scheduler lock implementation.
---3025-- Reading suppressions file: /usr/lib/valgrind/default.supp
-==3025== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-3025-by-rmoreno-on-???
-==3025== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-3025-by-rmoreno-on-???
-==3025== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-3025-by-rmoreno-on-???
-==3025== 
-==3025== TO CONTROL THIS PROCESS USING vgdb (which you probably
-==3025== don't want to do, unless you know exactly what you're doing,
-==3025== or are doing some strange experiment):
-==3025==   /usr/lib/valgrind/../../bin/vgdb --pid=3025 ...command...
-==3025== 
-==3025== TO DEBUG THIS PROCESS USING GDB: start GDB like this
-==3025==   /path/to/gdb ./main
-==3025== and then give GDB the following command
-==3025==   target remote | /usr/lib/valgrind/../../bin/vgdb --pid=3025
-==3025== --pid is optional if only one valgrind process is running
-==3025== 
---3025-- REDIR: 0x401b4a0 (ld-linux.so.2:strlen) redirected to 0x58055b23 (???)
---3025-- REDIR: 0x401b200 (ld-linux.so.2:index) redirected to 0x58055afe (???)
---3025-- Reading syms from /usr/lib/valgrind/vgpreload_core-x86-linux.so
---3025--   Considering /usr/lib/valgrind/vgpreload_core-x86-linux.so ..
---3025--   .. CRC mismatch (computed a460a904 wanted 5678b0f5)
---3025--    object doesn't have a symbol table
---3025-- Reading syms from /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so
---3025--   Considering /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so ..
---3025--   .. CRC mismatch (computed f6ab0125 wanted 3b6407d4)
---3025--    object doesn't have a symbol table
-==3025== WARNING: new redirection conflicts with existing -- ignoring it
---3025--     old: 0x0401b4a0 (strlen              ) R-> (0000.0) 0x58055b23 ???
---3025--     new: 0x0401b4a0 (strlen              ) R-> (2007.0) 0x04833430 strlen
---3025-- Reading syms from /lib/i386-linux-gnu/libc-2.27.so
---3025--   Considering /lib/i386-linux-gnu/libc-2.27.so ..
---3025--   .. CRC mismatch (computed 2953acbd wanted 0be3f66b)
---3025--   Considering /usr/lib/debug/lib/i386-linux-gnu/libc-2.27.so ..
---3025--   .. CRC is valid
---3025-- REDIR: 0x48e19a0 (libc.so.6:strncasecmp) redirected to 0x482a560 (_vgnU_ifunc_wrapper)
---3025-- REDIR: 0x48e7f70 (libc.so.6:memrchr) redirected to 0x482a560 (_vgnU_ifunc_wrapper)
---3025-- REDIR: 0x48fbb20 (libc.so.6:wcslen) redirected to 0x482a560 (_vgnU_ifunc_wrapper)
---3025-- REDIR: 0x48e0300 (libc.so.6:strcmp) redirected to 0x482a560 (_vgnU_ifunc_wrapper)
---3025-- REDIR: 0x48e0370 (libc.so.6:strcpy) redirected to 0x482a560 (_vgnU_ifunc_wrapper)
---3025-- REDIR: 0x48fad00 (libc.so.6:__GI_strrchr) redirected to 0x4832de0 (__GI_strrchr)
---3025-- REDIR: 0x48e3510 (libc.so.6:strchrnul) redirected to 0x48378a0 (strchrnul)
---3025-- REDIR: 0x48dcc30 (libc.so.6:malloc) redirected to 0x48301b0 (malloc)
---3025-- REDIR: 0x48fb1a0 (libc.so.6:__GI_strlen) redirected to 0x48333b0 (__GI_strlen)
---3025-- REDIR: 0x48fa900 (libc.so.6:__GI_mempcpy) redirected to 0x4837ad0 (__GI_mempcpy)
---3025-- REDIR: 0x48e1140 (libc.so.6:strstr) redirected to 0x4837f40 (strstr)
---3025-- REDIR: 0x48e83d0 (libc.so.6:__strcpy_ssse3) redirected to 0x4833470 (strcpy)
---3025-- REDIR: 0x49b0d30 (libc.so.6:__strcmp_ssse3) redirected to 0x48344e0 (strcmp)
---3025-- REDIR: 0x48dd250 (libc.so.6:free) redirected to 0x4831370 (free)
-==3025== 
-==3025== HEAP SUMMARY:
-==3025==     in use at exit: 0 bytes in 0 blocks
-==3025==   total heap usage: 26,418 allocs, 26,418 frees, 1,483,504 bytes allocated
-==3025== 
-==3025== All heap blocks were freed -- no leaks are possible
-==3025== 
-==3025== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==3025== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==2918== Memcheck, a memory error detector
+==2918== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2918== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==2918== Command: ./main entrada3.txt salida3.txt
+==2918== Parent PID: 1370
+==2918== 
+--2918-- 
+--2918-- Valgrind options:
+--2918--    --leak-check=full
+--2918--    --show-leak-kinds=all
+--2918--    --track-origins=yes
+--2918--    --verbose
+--2918--    --log-file=valgrind-out.txt
+--2918-- Contents of /proc/version:
+--2918--   Linux version 4.15.0-58-generic (buildd@lcy01-amd64-012) (gcc version 7.4.0 (Ubuntu 7.4.0-1ubuntu1~18.04.1)) #64-Ubuntu SMP Tue Aug 6 11:10:46 UTC 2019
+--2918-- 
+--2918-- Arch and hwcaps: X86, LittleEndian, x86-mmxext-sse1-sse2-sse3
+--2918-- Page sizes: currently 4096, max supported 4096
+--2918-- Valgrind library directory: /usr/lib/valgrind
+--2918-- Reading syms from /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main
+--2918-- Reading syms from /lib/i386-linux-gnu/ld-2.27.so
+--2918--   Considering /lib/i386-linux-gnu/ld-2.27.so ..
+--2918--   .. CRC mismatch (computed 343e7f94 wanted 790ead7f)
+--2918--   Considering /usr/lib/debug/lib/i386-linux-gnu/ld-2.27.so ..
+--2918--   .. CRC is valid
+--2918-- Reading syms from /usr/lib/valgrind/memcheck-x86-linux
+--2918--   Considering /usr/lib/valgrind/memcheck-x86-linux ..
+--2918--   .. CRC mismatch (computed 595f4df9 wanted 00d74df5)
+--2918--    object doesn't have a symbol table
+--2918--    object doesn't have a dynamic symbol table
+--2918-- Scheduler: using generic scheduler lock implementation.
+--2918-- Reading suppressions file: /usr/lib/valgrind/default.supp
+==2918== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-2918-by-rmoreno-on-???
+==2918== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-2918-by-rmoreno-on-???
+==2918== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-2918-by-rmoreno-on-???
+==2918== 
+==2918== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==2918== don't want to do, unless you know exactly what you're doing,
+==2918== or are doing some strange experiment):
+==2918==   /usr/lib/valgrind/../../bin/vgdb --pid=2918 ...command...
+==2918== 
+==2918== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==2918==   /path/to/gdb ./main
+==2918== and then give GDB the following command
+==2918==   target remote | /usr/lib/valgrind/../../bin/vgdb --pid=2918
+==2918== --pid is optional if only one valgrind process is running
+==2918== 
+--2918-- REDIR: 0x401b4a0 (ld-linux.so.2:strlen) redirected to 0x58055b23 (???)
+--2918-- REDIR: 0x401b200 (ld-linux.so.2:index) redirected to 0x58055afe (???)
+--2918-- Reading syms from /usr/lib/valgrind/vgpreload_core-x86-linux.so
+--2918--   Considering /usr/lib/valgrind/vgpreload_core-x86-linux.so ..
+--2918--   .. CRC mismatch (computed a460a904 wanted 5678b0f5)
+--2918--    object doesn't have a symbol table
+--2918-- Reading syms from /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so
+--2918--   Considering /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so ..
+--2918--   .. CRC mismatch (computed f6ab0125 wanted 3b6407d4)
+--2918--    object doesn't have a symbol table
+==2918== WARNING: new redirection conflicts with existing -- ignoring it
+--2918--     old: 0x0401b4a0 (strlen              ) R-> (0000.0) 0x58055b23 ???
+--2918--     new: 0x0401b4a0 (strlen              ) R-> (2007.0) 0x04833430 strlen
+--2918-- Reading syms from /lib/i386-linux-gnu/libc-2.27.so
+--2918--   Considering /lib/i386-linux-gnu/libc-2.27.so ..
+--2918--   .. CRC mismatch (computed 2953acbd wanted 0be3f66b)
+--2918--   Considering /usr/lib/debug/lib/i386-linux-gnu/libc-2.27.so ..
+--2918--   .. CRC is valid
+--2918-- REDIR: 0x48e19a0 (libc.so.6:strncasecmp) redirected to 0x482a560 (_vgnU_ifunc_wrapper)
+--2918-- REDIR: 0x48e7f70 (libc.so.6:memrchr) redirected to 0x482a560 (_vgnU_ifunc_wrapper)
+--2918-- REDIR: 0x48fbb20 (libc.so.6:wcslen) redirected to 0x482a560 (_vgnU_ifunc_wrapper)
+--2918-- REDIR: 0x48e0300 (libc.so.6:strcmp) redirected to 0x482a560 (_vgnU_ifunc_wrapper)
+--2918-- REDIR: 0x48e0370 (libc.so.6:strcpy) redirected to 0x482a560 (_vgnU_ifunc_wrapper)
+--2918-- REDIR: 0x48fad00 (libc.so.6:__GI_strrchr) redirected to 0x4832de0 (__GI_strrchr)
+--2918-- REDIR: 0x48e3510 (libc.so.6:strchrnul) redirected to 0x48378a0 (strchrnul)
+--2918-- REDIR: 0x48dcc30 (libc.so.6:malloc) redirected to 0x48301b0 (malloc)
+--2918-- REDIR: 0x48fb1a0 (libc.so.6:__GI_strlen) redirected to 0x48333b0 (__GI_strlen)
+--2918-- REDIR: 0x48fa900 (libc.so.6:__GI_mempcpy) redirected to 0x4837ad0 (__GI_mempcpy)
+--2918-- REDIR: 0x48e1140 (libc.so.6:strstr) redirected to 0x4837f40 (strstr)
+--2918-- REDIR: 0x48e83d0 (libc.so.6:__strcpy_ssse3) redirected to 0x4833470 (strcpy)
+--2918-- REDIR: 0x49b0d30 (libc.so.6:__strcmp_ssse3) redirected to 0x48344e0 (strcmp)
+--2918-- REDIR: 0x48dd250 (libc.so.6:free) redirected to 0x4831370 (free)
+==2918== 
+==2918== Process terminating with default action of signal 2 (SIGINT)
+==2918==    at 0x1096DD: fue_visitada (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109587: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918== 
+==2918== HEAP SUMMARY:
+==2918==     in use at exit: 2,127 bytes in 57 blocks
+==2918==   total heap usage: 14,095,595 allocs, 14,095,538 frees, 1,071,268,251 bytes allocated
+==2918== 
+==2918== Searching for pointers to 57 not-freed blocks
+==2918== Checked 48,556 bytes
+==2918== 
+==2918== 12 bytes in 1 blocks are still reachable in loss record 1 of 17
+==2918==    at 0x483021B: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==2918==    by 0x1089D2: cargar_archivo (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x10883A: main (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918== 
+==2918== 51 bytes in 20 blocks are still reachable in loss record 2 of 17
+==2918==    at 0x483021B: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==2918==    by 0x108B35: cargar_archivo (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x10883A: main (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918== 
+==2918== 76 bytes in 1 blocks are still reachable in loss record 3 of 17
+==2918==    at 0x483021B: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==2918==    by 0x108BD5: cargar_archivo (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x10883A: main (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918== 
+==2918== 76 bytes in 1 blocks are still reachable in loss record 4 of 17
+==2918==    at 0x483021B: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==2918==    by 0x1091A4: obtener_pesos_adyacentes (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x10945D: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x1093BD: menor_camino (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x108871: main (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918== 
+==2918== 76 bytes in 1 blocks are still reachable in loss record 5 of 17
+==2918==    at 0x483021B: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==2918==    by 0x1091A4: obtener_pesos_adyacentes (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x10945D: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x1093BD: menor_camino (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x108871: main (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918== 
+==2918== 76 bytes in 1 blocks are still reachable in loss record 6 of 17
+==2918==    at 0x483021B: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==2918==    by 0x1091A4: obtener_pesos_adyacentes (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x10945D: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x1093BD: menor_camino (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x108871: main (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918== 
+==2918== 76 bytes in 1 blocks are still reachable in loss record 7 of 17
+==2918==    at 0x483021B: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==2918==    by 0x1091A4: obtener_pesos_adyacentes (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x10945D: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x1093BD: menor_camino (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x108871: main (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918== 
+==2918== 76 bytes in 1 blocks are still reachable in loss record 8 of 17
+==2918==    at 0x483021B: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==2918==    by 0x1091A4: obtener_pesos_adyacentes (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x10945D: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x1093BD: menor_camino (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x108871: main (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918== 
+==2918== 76 bytes in 1 blocks are still reachable in loss record 9 of 17
+==2918==    at 0x483021B: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==2918==    by 0x1091A4: obtener_pesos_adyacentes (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x10945D: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x1093BD: menor_camino (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x108871: main (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918== 
+==2918== 76 bytes in 1 blocks are still reachable in loss record 10 of 17
+==2918==    at 0x483021B: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==2918==    by 0x1091A4: obtener_pesos_adyacentes (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x10945D: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x1093BD: menor_camino (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x108871: main (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918== 
+==2918== 76 bytes in 1 blocks are still reachable in loss record 11 of 17
+==2918==    at 0x483021B: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==2918==    by 0x1091A4: obtener_pesos_adyacentes (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x10945D: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x1093BD: menor_camino (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x108871: main (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918== 
+==2918== 76 bytes in 1 blocks are still reachable in loss record 12 of 17
+==2918==    at 0x483021B: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==2918==    by 0x1091A4: obtener_pesos_adyacentes (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x10945D: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x1093BD: menor_camino (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918== 
+==2918== 80 bytes in 1 blocks are still reachable in loss record 13 of 17
+==2918==    at 0x483021B: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==2918==    by 0x1089ED: cargar_archivo (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x10883A: main (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918== 
+==2918== 80 bytes in 1 blocks are still reachable in loss record 14 of 17
+==2918==    at 0x483021B: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==2918==    by 0x10936C: menor_camino (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x108871: main (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918== 
+==2918== 80 bytes in 1 blocks are still reachable in loss record 15 of 17
+==2918==    at 0x483021B: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==2918==    by 0x1094C6: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918== 
+==2918== 304 bytes in 4 blocks are still reachable in loss record 16 of 17
+==2918==    at 0x483021B: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==2918==    by 0x1091A4: obtener_pesos_adyacentes (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x10945D: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x109601: tsp (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918== 
+==2918== 760 bytes in 19 blocks are still reachable in loss record 17 of 17
+==2918==    at 0x483021B: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==2918==    by 0x108C1D: cargar_archivo (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918==    by 0x10883A: main (in /home/rmoreno/Desktop/Programming/C-C++/TP Final EdA/tsp_eda1/main)
+==2918== 
+==2918== LEAK SUMMARY:
+==2918==    definitely lost: 0 bytes in 0 blocks
+==2918==    indirectly lost: 0 bytes in 0 blocks
+==2918==      possibly lost: 0 bytes in 0 blocks
+==2918==    still reachable: 2,127 bytes in 57 blocks
+==2918==         suppressed: 0 bytes in 0 blocks
+==2918== 
+==2918== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==2918== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

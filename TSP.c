@@ -13,7 +13,7 @@ Mapa * cargar_archivo(char * archivo){
     return NULL;
   }
 
-  unsigned int tope = 15;    // Para empujar el maximo de ciudades dinamicamente
+  unsigned int tope = 20;    // Para empujar el maximo de ciudades dinamicamente
 
   Mapa * mapa = malloc(sizeof(Mapa));
   mapa->ciudades = malloc(sizeof(char *) * tope);

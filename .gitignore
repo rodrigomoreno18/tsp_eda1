@@ -1,7 +1,12 @@
 TP*
+*.s
 a
 main
 *.o
+*.out
 salida2.txt
 entrada2.txt
+entrada3.txt
+salida3.txt
 a.c
+valgrind-out.txt

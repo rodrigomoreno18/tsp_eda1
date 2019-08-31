@@ -4,7 +4,7 @@ import pdb
 
 def generate(cities):
 	if len(cities) < 2:
-		return []
+		raise Exception
 
 	mixed_cities = cities.copy()
 	random.shuffle(mixed_cities)
@@ -34,23 +34,55 @@ def generate(cities):
 	yield paths, min_weight
 
 
+def create_full(city_count):
+	matrix = []
+	for i in range(city_count - 1):
+		matrix.append([[]] * (i + 1))
+
+		for j in range(i + 1):
+			matrix[i][j] = random.randint(1, 20)
+
+	return matrix
+
+
+def write_file(matrix, file):
+	with open(file, 'w') as f:
+		f.write('Ciudades\n')
+
+		for i in range(len(matrix)):
+			f.write(str(i+1) + ', ')
+
+		f.write('\nCostos\n')
+
+		for i,column in enumerate(matrix):
+			for j in range(len(column)):
+				if i != j:
+					f.write(str(i+1) + ',' + str(j+1) + ',' + str(matrix[i][j]) + '\n')
+
 if __name__ == '__main__':
-	cities = sys.argv[1:]
+	mat = create_full(21)
 
-	gen = generate(cities)
-
-
-	paths, min_weight = next(gen)
-
-	print('Solution: ')
-	for path in paths:
-		print(','.join(path))
-	print('Minimum weight: ' + str(min_weight) + '\n')
+	for column in mat:
+		print(column)
 
 
-	print('Cities:\n' + ', '.join(cities) + '\nPaths:')
+	write_file(mat, 'entrada3.txt')
+# 	cities = sys.argv[1:]
 
-	paths, min_weight = next(gen)
-	for path in paths:
-		print(','.join(path))
+# 	gen = generate(cities)
+
+
+# 	paths, min_weight = next(gen)
+
+# 	print('Solution: ')
+# 	for path in paths:
+# 		print(','.join(path))
+# 	print('Minimum weight: ' + str(min_weight) + '\n')
+
+
+# 	print('Cities:\n' + ', '.join(cities) + '\nPaths:')
+
+# 	paths, min_weight = next(gen)
+# 	for path in paths:
+# 		print(','.join(path))
 
