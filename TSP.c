@@ -8,6 +8,8 @@ Mapa * cargar_archivo(char * archivo){
   FILE * fp;
   fp = fopen(archivo, "r");
 
+  printf("Abriendo archivo '%s'...", archivo);
+
   if (!fp) {
     printf("Error abriendo el archivo %s.", archivo);
     return NULL;
@@ -53,11 +55,11 @@ Mapa * cargar_archivo(char * archivo){
   }
 
   /* Debug
-  printf("Ciudades : [");
+  printf("%d Ciudades : (", mapa->cantidad_ciudades);
   for (i = 0; i < mapa->cantidad_ciudades; ++i) {
-    printf("%s, ", mapa->ciudades[i]);
+    printf("[%s]", mapa->ciudades[i]);
   }
-  printf("]\n");
+  printf(")\n");
   */
 
   // Inicializar la matriz triangular superior en 0
@@ -73,7 +75,8 @@ Mapa * cargar_archivo(char * archivo){
 
     ++iteraciones;
   }
-  // Debugprintf("\n");
+  //Debug
+  //printf("\n");
   // Tragar el texto "Costos"
   while ((a = fgetc(fp)) != '\n')
     if (a == EOF) return NULL;
@@ -136,6 +139,8 @@ Mapa * cargar_archivo(char * archivo){
     else
       mapa->pesos[indice1 - 1][indice2] = peso;
   }
+
+  printf(" OK\n");
   
   fclose(fp);
 
@@ -145,6 +150,8 @@ Mapa * cargar_archivo(char * archivo){
 void guardar_archivo(char * archivo, Mapa * mapa, Camino camino) {
   FILE * fp;
   fp = fopen(archivo, "w+");
+  
+  printf("Guardando en archivo '%s'...", archivo);
 
   if (!fp) {
     printf("Error abriendo el archivo %s.", archivo);
@@ -171,6 +178,8 @@ void guardar_archivo(char * archivo, Mapa * mapa, Camino camino) {
     }
 
   }
+
+  printf(" OK\n");
 
   fprintf(fp, "\nPeso total: %u\n", camino.peso_total);
 
