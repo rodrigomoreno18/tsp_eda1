@@ -21,6 +21,7 @@ make clean (para limpieza de objetos)
 ./main <input_file> <output_file>
 ```
 
+
 **Notas:**
  - El programa espera que el archivo de entrada tenga terminaciones de lineas UNIX (\n) en lugar de DOS (\r\n).
- - La última línea del archivo de entrada debe ser el último camino. En caso de haber una línea vacía, no funciona correctamente
+ - La última línea del archivo de entrada debe ser un camino. En caso de haber una línea vacía, no funciona correctamente

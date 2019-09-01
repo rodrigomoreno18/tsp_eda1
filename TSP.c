@@ -286,19 +286,16 @@ Camino tsp(Mapa * mapa, Camino optimo, Camino temporal, Visitadas visitadas, uns
   unsigned int peso_guardado = nuevo.peso_total;  // Para frenar incrementado por iteracion
 
   visitadas = visitar(visitadas, actual);
-  pesos_adyacentes = obtener_pesos_adyacentes(mapa, actual);
 
   // Caso "base" (todas visitadas)
   if (visitadas.cantidad_visitada == mapa->cantidad_ciudades) {
     // En este punto, todas fueron visitadas
 
-    if (pesos_adyacentes[0] != 0) {
+    if (mapa->pesos[actual - 1][0] != 0) {
       // Existe una conexion entre la actual (ultima)
       // y la inicial, comparar pesos para decidir si es optimo
 
-      nuevo.peso_total += pesos_adyacentes[0];
-
-      free(pesos_adyacentes);
+      nuevo.peso_total += mapa->pesos[actual - 1][0];
       
       /* Debug
       printf("\nCamino terminal : ");
@@ -321,19 +318,16 @@ Camino tsp(Mapa * mapa, Camino optimo, Camino temporal, Visitadas visitadas, uns
           optimo.recorrido[i] = nuevo.recorrido[i];
         optimo.peso_total = nuevo.peso_total;
       }
-
-      // En caso que el nuevo no sea menor al optimo
-      return optimo;
-    } else {
-      // En este caso, no existe conexion entre la ultima y la primera
-      // Por lo tanto el optimo sigue siendo el ya existente
-
-      free(pesos_adyacentes);
-      return optimo;
     }
+
+    // En este punto, optimo tiene el mejor camino previo
+    // o el nuevo mejor camino (si el bloque anterior se pudo ejecutar)
+    return optimo;
   } else {
     // Si no es el caso "base", aplicar llamadas recursivas
     // de forma iterativa sobre las conexiones de la ciudad actual
+
+    pesos_adyacentes = obtener_pesos_adyacentes(mapa, actual);
 
     for (i = 1; i < mapa->cantidad_ciudades; ++i) {
       a_calcular = i - (i >= actual ? 1 : 0);
@@ -361,9 +355,9 @@ Camino tsp(Mapa * mapa, Camino optimo, Camino temporal, Visitadas visitadas, uns
       // Llamado recursivo
       optimo = tsp(mapa, optimo, nuevo, visitadas, i);
     }
-  }
 
-  free(pesos_adyacentes);
+    free(pesos_adyacentes);
+  }
 
   return optimo;
 }
