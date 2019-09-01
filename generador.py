@@ -2,6 +2,7 @@ import random
 import sys
 import pdb
 
+# Currently unused, unfinished
 def generate(cities):
   if len(cities) < 2:
     raise Exception
@@ -61,13 +62,21 @@ def write_file(matrix, file):
           f.write('\n' + str(i+1) + ',' + str(j+1) + ',' + str(matrix[i][j]))
 
 if __name__ == '__main__':
+  if len(sys.argv) != 3:
+    print('Usage: python3 generador.py <city_qty> <output_file>')
+    sis.exit()
+
   mat = create_full(int(sys.argv[1]))
 
-  for column in mat:
-    print(column)
+  print('Adjacency Matrix:')
+  for i in range(len(mat)):
+    print('\n' + ('   ' * i))
+    for j in range(i, len(mat)):
+      print(str(mat[j][i]).rjust(3, ' '), end='')
 
+  print('\n')
 
-  write_file(mat, 'entrada3.txt')
+  write_file(mat, sys.argv[2])
 #   cities = sys.argv[1:]
 
 #   gen = generate(cities)
